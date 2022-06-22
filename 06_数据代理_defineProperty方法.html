@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="./js/vue.js"></script>
+    <title>defineproperty方法</title>
+</head>
+
+<body>
+    <!-- 创建一个Vue模板 -->
+
+    <script type="text/javascript">
+        let number = 19
+
+        let persion = {
+            name: 'ljs',
+            sex: '男'
+        }
+
+        Object.defineProperty(persion, 'age',{
+            // value: 18,
+            // enumerable: true, //控制属性是否可以被枚举
+            // writable: true, //控制属性是否可以被修改 默认false
+            // configurable: true,//控制属性是否可以被删除
+            
+            //当有人读取oersion中的age属性时，get函数就会被调用（getter）,返回age的值
+            get: function () {
+                return number
+            },
+            // 修改 setter
+            set(value){
+                number = value
+            }
+        })
+    </script>
+</body>
+<script>
+    // 创建一个Vue实例 
+    const vm = new Vue({
+
+    })
+
+
+</script>
+
+
+</html>

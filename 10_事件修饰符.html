@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/vue.js"></script>
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            overflow: auto;
+            background-color: rgb(30, 168, 99);
+        }
+        li{
+            height:  100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Vue中的事件修饰符：
+        1.prevent：阻止默认事件（常用）
+        2.stop：阻止事件冒泡（常用）
+        3.once:事件只触发一次（常用）
+        4.capture：使用事件的捕获模式
+        5.shel:只有event.target 是当前元素时才会触发事件
+        6.passive:事件的默认行为立即执行，无需等待事件的回调执行完毕
+     -->
+    <div id="root">
+        <!-- prevent：阻止默认事件（常用） -->
+        <a href="https://www.baidu.com" @click.prevent="showMsg('阻止默认事件')">阻止默认事件</a>
+        <!-- stop：阻止事件冒泡（常用） -->
+        <div @click="showInfo">          
+            <button @click.stop="showInfo"> 阻止冒泡事件</button>
+        </div>
+        <!-- 3.once:事件只触发一次（常用）-->
+        <button @click.once="showOnceInfo"> 只触发一次事件</button>
+        
+        <!-- 4.capture：使用事件的捕获模式  捕获是由外像内的，冒泡是由内像外的，capture 可以在捕获时执行-->
+        <div @click.capture="showMsg(1)">
+            div1
+            <div @click="showMsg(2)">
+                div2
+            </div>
+        </div>
+
+        <!-- 5.shel:只有event.target 是当前元素时才会触发事件 变相的，阻止了冒泡！ -->
+        <div @click.self="showShelfTarget">
+            <button @click="showShelfTarget">内部按钮</button>
+        </div>
+
+        <!-- 6.passive:事件的默认行为立即执行，无需等待事件的回调执行完毕 -->
+        <ul class="box" @wheel.passive="showPassiveInfo">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el:'#root',
+        data(){
+            return{
+
+            }
+        },
+        methods:{
+            showMsg(msg){
+                alert(msg)
+            },
+            showInfo(){
+                alert('冒泡事件')
+            },
+            showOnceInfo(){
+                alert('只触发一次事件')
+            },
+            showShelfTarget(e){
+                console.log(e.target)
+            },
+            showPassiveInfo(){
+                for (let index = 0; index < 10000; index++) {
+                    console.log(index)                    
+                }
+            }
+        }
+    })
+</script>
+
+</html>

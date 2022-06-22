@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="./js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        MVVM模型
+            1、M: 模型（Modle）：data中的数据
+            2、V：视图（VIEW）：模板代码
+            3、VM 视图模型（viewmodel）：Vue实例
+        验证结果:
+            1、data中的所有属性，最后都出现在了vm身上
+            2、vm身上的所有属性及Vue原型上的所有属性，在Vue模板中都可以直接使用
+     -->
+     <!-- 准备好一个容器   Vue模板-->
+     <div id="root">
+        <span> {{ name }}</span>
+        <span> {{ $options }}</span>
+        <span> {{ _uid }}</span>
+     </div>
+</body>
+<script>
+    const vm = new Vue ({ //vm实例
+        el:'#root',
+        data:{
+            name:'ljs'  // 模型
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="./js/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        事件的基本使用：
+            1、使用v-on：xxx 或者 @xxx 绑定事件，xxx为事件名称
+            2、事件的回调需要配置在methods中，最终会在vm上
+            3、methods中的配置函数，不可以使用箭头函数！否则this就不是vm了
+            4、methods中配置的函数，都是被Vue所管理的函数，this执行vm 或者组件的实例对象
+            5、@click='demo' 和 @click='demo($event)' 效果一样，但是后者可以传参
+     -->
+    <div id="root">
+        <h1>开始学习{{ name }}</h1>
+        <button type="button" @click="info">点我提示信息</button>
+        <button type="button" @click="info2(66)">点我提示信息</button>
+
+    </div>
+
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: 'Vue事件处理'
+
+            }
+
+        },
+        methods: {
+            // 方法的定义方式一，这里的this 是VUE的实例对象
+            info() {
+                alert('努力加油！')
+            },
+            // 方法定义二 箭头函数，这里的this是windows,内部不要使用箭头函数
+            info1: () => {
+                console.log(this)
+            },
+            info2(number){
+                alert( '传入的数字是' + number)
+            }
+            
+        }
+    })
+</script>
+
+</html>

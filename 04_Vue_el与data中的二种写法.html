@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+        1、el的二种写法
+            （1）new Vue时配置el属性
+            （2）先创建Vue实例，随后通过vm.$mount('#root')指定el的值
+        2、data的二种写法
+            （1）对象式 data:{}
+            （2）函数式data:function(){
+                                        return{
+                                            message:''
+                                        }
+                                    }  
+            简写---data(){...}
+        3、重要原则
+            由Vue管理的函数，一定不要适用箭头函数，箭头函数的this 是Window
+     -->
+    <div id="root">
+        <span >{{ message}}</span>
+    </div>
+
+</body>
+<script>
+    // Vue中data和el的二种写法，组件是data要求写成方法
+    Vue.config.productionTip = false
+    const app = new Vue({
+        data() {
+            return {
+                message: 'ljs'
+            }
+        }
+    })
+    //  使用后绑定的方式来指定模板，可以在绑定之前做一些其他的动作比如，延迟加载之类的
+    app.$mount('#root')
+</script>
+
+</html>
