@@ -30,16 +30,22 @@
         },
 
         computed: {
-            showName1: {
-                get() {
-                    return this.firstname + '-' + this.lastname
-                },
-                set(value) {
-                    const arr = value.split('-')
-                    this.firstname = arr[0]
-                    this.lastname = arr[1]
-                }
+            // showName1: {
+            //     get() {
+            //         return this.firstname + '-' + this.lastname
+            //     },
+            //     set(value) {
+            //         const arr = value.split('-')
+            //         this.firstname = arr[0]
+            //         this.lastname = arr[1]
+            //     }
+            // }
+            // 简写模式，不需要配置成对象，简写成一个函数
+
+            showName1(){
+                return this.firstname + '-' + this.lastname
             }
+
         }
     })
 </script>
