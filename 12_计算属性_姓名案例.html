@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <input type="text" v-model:value="firstname"><br>
+        <input type="text" v-model:value="lastname"><br>
+        <!-- 使用插值语法实现 -->
+        <span> {{ firstname }}-{{ lastname }}</span><br>
+        <!-- 使用方法实现，缺点，data中的数据发生变化，都需要重新解析模板，重新调用方法  -->
+        <span> {{ showName() }}</span>
+        <br>
+        <!-- 使用计算属性 -->
+        <span> {{ showName1 }}</span><br>
+        <!-- 计算属性：
+                1.定义：要用的属性不存在，需要使用已有的属性计算得来
+                2.原理：底层借助了Object.defineproperty 方法提供的getter 和 setter
+                3.get函数什么时候执行
+                    (1)初次读取会执行一次。
+                    (2)当依赖的数据发生变化时会被在调用
+                4.优势：与methods实现相比，内部有缓存机制，，效率更高，调试方便
+                5.备注：
+                    1.计算属性最终会出现在vm身上，可以直接读取
+                    2.如果计算属性要被修改，那么必须要写set函数去响应修改，且set中要引起计算时依赖的数据发生变化        
+        -->
+
+
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                firstname: 'zhang',
+                lastname: 'san'
+            }
+        },
+        methods: {
+            showName() {
+                return this.firstname + '-' + this.lastname
+            }
+        },
+        computed: {
+            showName1: {
+                get() {
+                    return this.firstname + '-' + this.lastname
+                },
+                set(value) {
+                    const arr = value.split('-')
+                    this.firstname = arr[0]
+                    this.lastname = arr[1]
+                }
+            }
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <input type="text" v-model:value="firstname"><br>
+        <input type="text" v-model:value="lastname"><br>
+        <!-- 使用计算属性 -->
+        <span> {{ showName1 }}</span><br>
+
+
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                firstname: 'zhang',
+                lastname: 'san'
+            }
+        },
+
+        computed: {
+            showName1: {
+                get() {
+                    return this.firstname + '-' + this.lastname
+                },
+                set(value) {
+                    const arr = value.split('-')
+                    this.firstname = arr[0]
+                    this.lastname = arr[1]
+                }
+            }
+        }
+    })
+</script>
+
+</html>
