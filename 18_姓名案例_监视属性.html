@@ -9,6 +9,15 @@
 </head>
 <body>
     <div id="root">
+        <!-- 
+            computed与watch之间的区别：
+                1、computed能完成的功能，watch都能完成
+                2、watch不能完成的功能computed不一定能完成，例如：watch可以进行异步操作。
+            俩个重要原则：
+                1、所有被Vue管理的函数，最好写成普通函数，这样this指向的才是vm  或者组件实例对象
+                2、所有不被Vue管理的函数（定时器的回调函数，ajaxd的回调函数等）最好写成箭头函数，
+                这样才是vm  或者组件实例对象
+         -->
         姓：<input type="text" v-model="firstname">
         名：<input type="text" v-model="lastname">
         全名：<span>{{ fullname }}</span>

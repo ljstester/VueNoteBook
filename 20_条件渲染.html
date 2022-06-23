@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 条件渲染：
+            1、v-if
+                写法：
+                    1、v-if ='表达式'
+                    2、v-else-if='表达式'
+                    3、v-else 
+                适用于：切换频率比较低的场景
+                特点：不展示的dom元素直接移除
+                注意：v-if 可以和v-else-if v-else 一起使用，但要求结构不能被打断
+            2、v-show
+                写法：v-show="表达式"
+                适用于切换频率比较高的场景
+                特点：隐藏样式
+            3、备注:使用v-if时，元素可能无法获取，而使用v-show可以获取到
+            
+        -->
+    <div id="root">
+
+        <span v-show=false>你好{{ name }}</span>
+    </div>
+
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: 'ljs'
+            }
+        }
+    })
+</script>
+
+</html>

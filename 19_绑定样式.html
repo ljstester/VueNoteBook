@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        .basic {
+            height: 50px;
+            width: 200px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 绑定class 样式字符串写法，适用于样式的类名不确定，需要动态指定 -->
+        <div class="basic" :class="mode" @click="changeModle">{{name}}</div>
+        <!-- 绑定class 样式字数组写法，适用于要绑定的样式个数不确定，名字也不确定 -->
+        <div class="basic" :class="classArr">{{name}}</div>
+        <!-- 绑定class 样式字对象写法，适用于要绑定的样式个数确定，名字也不确定，但要动态决定用不用-->
+        <div class="basic" :class="classObj">{{name}}</div>
+
+        <!-- 绑定style写法，绑定对象 -->
+        <div class="basic" :style="styleObj">{{ name }}</div>
+
+
+
+
+    </div>
+
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+
+            name: 'ljs',
+            mode: '',
+            classArr: ['mode4', 'mode5', 'mode6'],
+            classObj: {
+                mode7: true,
+                mode8: false
+            },
+            styleObj: {
+                frontSize: '40px',
+                backgroupColour: red
+            }
+
+        },
+        methods: {
+            changeMode() {
+                const arr = ['mode1', 'mode2', 'mode3']
+                let index = Math.floor(Math.random() * 3)
+                this.mode = arr[index]
+            }
+        },
+
+    })
+</script>
+
+</html>
