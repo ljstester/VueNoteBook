@@ -18,7 +18,7 @@
             <!-- 遍历对象 -->
             <li v-for="(value,key) in user" :key="key"> {{value}} - {{key}}</li>
             <!-- 遍历字符串 -->
-            <li v-for="(value,index) in strings" ::key="index">{{value}} - {{index}}</li>
+            <li v-for="(value,index) in strings" :key="index">{{value}} - {{index}}</li>
         </ul>
     </div>
 
