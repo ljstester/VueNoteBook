@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表的排序</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>人员列表</h1>
+        <input type="text" v-model="input" placeholder="请输入要搜索的姓名关键字">
+        <button @click="sortType = 1">按年龄升序</button>
+        <button @click="sortType = 2">按年龄降序</button>
+        <button @click="sortType = 0">按原顺序</button>
+        <ul>
+            <li v-for="person in filPersons" :key="person.id"> {{person.name}}-{{person.age}}-{{person.sex}}</li>
+        </ul>
+    </div>
+
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                input: '',
+                sortType: 0,
+                persons: [{
+                        id: '001',
+                        name: '张三',
+                        age: 18,
+                        sex: '男'
+                    },
+                    {
+                        id: '002',
+                        name: '李四',
+                        age: 19,
+                        sex: '男'
+                    },
+                    {
+                        id: '003',
+                        name: '王五',
+                        age: 16,
+                        sex: '男'
+                    },
+                    {
+                        id: '004',
+                        name: '赵六',
+                        age: 21,
+                        sex: '男'
+                    },
+                ]
+            }
+        },
+        computed: {
+            filPersons() {
+
+                const arr = this.persons.filter((p) => {
+                    return p.name.indexOf(this.input) !== -1
+                })
+
+
+                if (this.sortType) {
+                    arr.sort((a, b) => {
+                        return this.sortType == 1 ? a.age - b.age : b.age - a.age
+                    })
+
+                }
+
+                return arr
+
+
+            }
+
+        }
+    })
+</script>
+
+</html>
