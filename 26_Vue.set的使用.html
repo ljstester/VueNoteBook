@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>姓名：{{ name }}</h2>
+        <h2>地址：{{ adress }}</h2>
+        <hr>
+        <h2>family</h2>
+        <button @click="addFather">添加家庭成员</button>
+        <h2>{{family.wife}}</h2>
+        <h2>{{family.son}}</h2>
+        <h2 v-if="family.father">{{family.father}}</h2>
+
+        <hr>
+        <h2>friends</h2>
+        <ul>
+            <li v-for="(friend,index) in  family.friends" :key="index"> {{friend.name}}-{{friend.age}}</li>
+        </ul>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    name: 'ljs',
+                    adress: 'nj',
+                    family: {
+                        wife: 'lt',
+                        son: 'lar',
+                        friends: [
+                            { name: 'xm', age: 30 },
+                            { name: 'mx', age: 30 }
+                        ]
+                    }
+                }
+            },
+            methods: {
+                addFather() {
+                    // set方法使用的二种方式！
+                    // Vue.set(this.family, 'father', 'lzs')
+                    this.$set(this.family, 'father', 'lzs')
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
