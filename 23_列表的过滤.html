@@ -63,10 +63,10 @@
     //     watch: {
     //         // 总结几个错误：
     //         //  1、immediate 写在了input外面
-    //         //  2、使用for循环时，使用fiPersons.name，无法获取到，正确的是使用，遍历出来的value 进行person.value 获取
+    //         //  2、使用for循环时，使用fiPersons.name，无法获取到，正确的是使用，遍历出来的value 进行value.name 获取
 
     //         input: {
-    //             immediate: true,
+    //             immediate: true, //上来就执行一次
 
     //             handler(val) {
     //                 this.fiPersons = this.persons.filter((p) => {
