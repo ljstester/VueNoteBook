@@ -10,29 +10,31 @@
 </head>
 
 <body>
-    <!--  
-1、Vue监视数据的原理：
-	1,vue会监视data中所有层次的数据。
-	2.如何监测对象中的数据？
- 2、通过setter实现监视，且要在new Vuell时就传入要监测的数据。
-	(1)对象中后追加的属性，Vue默认不做响应式处理
-	(2),如需给后添加的属性做响应式，请使用如下API:
-		Vue,set(target,propertyName/index,value)或
-		vm.Sset(target,propertyName/index,value)
- 3、如何监测数组中的数据？
-	通过包裹数组更新元素的方法实现，本质就是做了两件事：
-		(1),调用原生对应的方法对数组进行更新。
-		(2).重新解析模板，进而更新页面。
- 4、在Vue修改数组中的某个元素一定要用如下方法：
-	1.使用这些ApI:push()、pop()、shift()、unshift()、splice()、sort()、reverse()
-	2.Vue,set()或vm.$set()
-	特别注意：Vue.set()和vm.$set()不能给vm或vm的根数据对象添加属性！！
+<!--  
+        1、Vue监视数据的原理：
+            1,vue会监视data中所有层次的数据。
+            2.如何监测对象中的数据？
+        2、通过setter实现监视，且要在new Vue()时就传入要监测的数据。
+            (1)对象中后追加的属性，Vue默认不做响应式处理
+            (2),如需给后添加的属性做响应式，请使用如下API:
+                Vue.set(target,propertyName/index,value)或
+                vm.$set(target,propertyName/index,value)
+        3、如何监测数组中的数据？
+            通过包裹数组更新元素的方法实现，本质就是做了两件事：
+                (1).调用原生对应的方法对数组进行更新。
+                (2).重新解析模板，进而更新页面。
+        4、在Vue修改数组中的某个元素一定要用如下方法：
+            1.使用这些ApI:push()、pop()、shift()、unshift()、splice()、sort()、reverse()
+            2.Vue.set()或vm.$set()
+            特别注意：Vue.set()和vm.$set()不能给vm或vm的根数据对象添加属性！！
  -->
     <div id="root">
         <button @click="user.age++">年龄+1岁</button>
-        <button @click="addSex">添加性别属性</button>
-        <button @click="updateSex">修改性别属性</button>
-        <button @click="addFriend">列表首位添加一个朋友</button>
+        <button @click.once="addSex">添加性别属性</button>
+        <button @click.once="updateSex">修改性别属性</button>
+        <button @click.once="addFriend">列表首位添加一个朋友</button>
+        <button @click.once="addHobbys">添加一个爱好</button>
+        <button @click.once="updataHobbys">修改第一个爱好为开车</button>
         <h1>用户信息</h1>
         <h2>姓名：{{ user.name}}</h2>
         <h2>年龄：{{ user.age }}</h2>
@@ -74,8 +76,19 @@
             updateSex(){
                 Vue.set(this.user,'sex','男人')
             },
-            addFriend(){}
-            
+            addFriend(){
+                this.friends.unshift({name:'cody',age:24})
+            },
+            updataFistFriend(){
+                this.friends[0].name = '张三'
+            },
+            addHobbys(){
+                this.hobbys.push('学习')
+            },
+            updataHobbys(){
+                this.hobbys.splice(0,1,'开车')
+            }
+
         },
     })
 </script>
