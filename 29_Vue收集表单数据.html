@@ -10,23 +10,75 @@
 </head>
 
 <body>
+    <!-- 
+        收集表单数据：
+            若 <input type='text'/>,则v-model收集的是value值，用户输入的就是value的值
+            若 <input type="radio"/>,则v-model收集的是value的值，且要给标签配置value的值
+            若 <input type='checkbox'/>
+                1、若没有配置input的value属性，那么收集的就是checked(勾选 or 未勾选 ，是布尔值)
+                2、若配置了value属性
+                    （1）v-model的初始值是非数组，那么搜集到的也是布尔值
+                    （2）v-model的初始值是数组，收集到的就是value
+            备注：
+                v-model的三个修饰符
+                    lazy:失去焦点在搜集数据
+                    number:输入字符串转为有效的数字
+                    trim:输入收尾空格过滤
+    -->     
     <div id="root">
-        <form>
-  
+        <br>
+        账号：<input type="text" v-model="userInfo.username"><br>
+        密码：<input type="password" v-model="userInfo.password"><br>
+        性别：<br>
+        男<input type="radio" v-model="userInfo.sex" value="man" class="demo">
+        女<input type="radio" v-model="userInfo.sex" value="woman" class="demo"><br>
+        年龄：<input type="number" v-model.number="userInfo.age"><br>
+        爱好：<br>
+        抽烟：<input class='demo1' type="checkbox" v-model="userInfo.hobby" value="smoke">
+        喝酒：<input class='demo1' type="checkbox" v-model="userInfo.hobby" value="drink">
+        烫头：<input class='demo1' type="checkbox" v-model="userInfo.hobby" value="perm"><br>
+        家庭住址：
+        <select v-model="userInfo.address">
+            <option value="jiangning">江宁</option>
+            <option value="qixia">栖霞</option>
+            <option value="xuanwu">玄武</option>
+            <option value="gulou">鼓楼</option>
+        </select>
+        <br></br>
+        其他信息：<textarea v-model="userInfo.other"></textarea>
+        <br></br>
+        <input type="checkbox" v-model="userInfo.confirm">
+        阅读并接受协议<a href="https://www.baidu.com">用户协议</a>
+        <br></br>
+        <button @click="submit">提交</button>
+
+
         </form>
     </div>
 
 </body>
 <script>
-    new Vue({
-        el: 'root',
+    const vm = new Vue({
+        el: '#root',
         data() {
             return {
-                name: '',
-                password: ''
-
+                userInfo: {
+                    username: '',
+                    password: '',
+                    age:'',
+                    sex: '',
+                    hobby: [],
+                    address: 'jiangning',
+                    other: '',
+                    confirm: false
+                }
             }
-        }
+        },
+        methods: {
+            submit() {
+                console.log(JSON.stringify(this.userInfo))
+            }
+        },
     })
 </script>
 
