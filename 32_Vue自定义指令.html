@@ -8,11 +8,13 @@
     <script src="./js/vue.js"></script>
 </head>
 <body>
+    <!-- 需求1：定义一个v-big指令，把绑定的数值放大10倍
+         需求2：定义一个v-fbind指令，可以让其绑定的input元素默认获得焦点    
+    -->
     <div id="root">
         <button @click="n++">点我+1</button>
         <span v-big="n"></span>
     </div>
-
 </body>
 <script>
     new Vue({
