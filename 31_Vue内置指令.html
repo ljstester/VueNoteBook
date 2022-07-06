@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内置指令</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        v-text : 类似差值语法
+        v-html ：可以解析文内的html元素
+        v-once ：
+        v-clock：
+        v-pre  ：不解析模板
+    -->
+    <div id="root">
+        <span v-text="name"></span>
+        <span v-html="sty"></span>
+        <span v-pre>{{ name }}</span>
+    </div>
+</body>
+<script>
+    new Vue({
+        el:'#root',
+        data(){
+            return{
+                name:'ljs',
+                sty:'<h2> ljs </h2>'
+            }
+        }
+    })
+</script>
+</html>
