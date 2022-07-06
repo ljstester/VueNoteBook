@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <button @click="n++">点我+1</button>
+        <span v-big="n"></span>
+    </div>
+
+</body>
+<script>
+    new Vue({
+        el:'#root',
+        data(){
+            return{
+                n : 10,
+            }
+        },
+        // big函数何时会调用？ 1、指令元素成功绑定时 2、指令元素所在的模板被重新解析时
+        directives:{
+            big(element,binding){
+                element.innerText = binding.value * 10
+            }
+        }
+    })
+</script>
+</html>
