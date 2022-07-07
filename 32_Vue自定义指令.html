@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,29 +8,82 @@
     <title>自定义指令</title>
     <script src="./js/vue.js"></script>
 </head>
+
 <body>
     <!--需求1：定义一个v-big指令，把绑定的数值放大10倍
         需求2：定义一个v-fbind指令，可以让其绑定的input元素默认获得焦点    
+
+
+        自定义指定总结：
+            1、定义语法：
+                1）：局部指令
+                    new Vue({
+                        directives:{
+                            指令名：配置对象
+                        }
+                    })
+                    new Vue({
+                        指令名：回调函数
+                    })
+                2）：全局指令
+                    Vue.directive(指令名：配置对象) 或者 Vue.directive(指令名：回调函数)
+            2、配置对象的三个回调函数
+                1)、bind: 指令与元素成功绑定时调用
+                2）、inserted: 指令所在元素插入页面时调用
+                3）、update: 指令所在模板结构被重新解析时调用
+            3、备注
+                1、指令定义时不加v- ,但是使用时要加v-;
+                2、指令名称如果是多个单词，要使用xxx-xxx命名，不能使用驼峰
     -->
     <div id="root">
         <button @click="n++">点我+1</button>
-        <span v-big="n"></span>
+        <span v-big:value="n"></span>
+        <input type="text" v-fbind:value="n">
     </div>
 </body>
 <script>
-    new Vue({
-        el:'#root',
-        data(){
-            return{
-                n : 10,
+    // 全局写法
+    Vue.directive('fbind', {
+            bind(ele, binding) {
+                ele.value = binding.value
+            },
+            inserted(ele, binding) {
+                ele.focus()
+            },
+            update(ele, binding) {
+                ele.value = binding.value
+            }
+    }) 
+    Vue.directive('big', function(ele,binding){
+        ele.innerText = binding.value * 10
+    })
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                n: 10,
             }
         },
         // big函数何时会调用？ 1、指令元素成功绑定时 2、指令元素所在的模板被重新解析时
-        directives:{
-            big(element,binding){
-                element.innerText = binding.value * 10
-            }
-        }
+        // 局部写法
+        // directives:{
+        //     big(element,binding){
+        //         element.innerText = binding.value * 10
+        //     },
+        //     fbind:{
+        //         bind(ele,binding){
+        //             ele.value = binding.value
+        //         },
+        //         inserted(ele,binding){
+        //             ele.focus()
+        //         },
+        //         update(ele,binding){
+        //             ele.value = binding.value
+
+        //         },
+        //     }
+        // }
     })
 </script>
+
 </html>
