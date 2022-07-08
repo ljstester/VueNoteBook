@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <!--常用的生命周期钩子：
+            1.mounted：发送ajax请求，启动定时器，绑定自定义事件，订阅消息等
+            2.beforeDestroy:清除定时器，解绑自定义时间，取消订阅消息，
+        关于销毁Vue实例
+            1.销毁后Vue不存在任何信息
+            2.销毁后自定义事件会失效
+            3.一般不会在beforeDestroy操作数据，也不会在触发更新流程了
+    -->
+    <div id="root">
+        <h2 :style="{ opacity }"> {{ name }}</h2>
+        <!-- 今天把按钮写到了head里 傻逼 -->
+        <button @click="stop">点我销毁</button>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: 'ljs',
+                opacity: 1
+            }
+        },
+        methods: {
+            stop() {
+                console.log('222222')
+                this.$destroy()
+            }
+        },
+        // Vue 完成模板的解析，并把真实Dom元素放入页面后，调用mounted
+        mounted() {
+            this.timer = setInterval(() => {
+                this.opacity -= 0.01
+                if (this.opacity <= 0) {
+                    this.opacity = 1
+                }
+            }, 16);
+        },
+        beforeDestroy() {
+            console.log('111111')
+            clearInterval(this.timer)
+        },
+    })
+</script>
+
+</html>
