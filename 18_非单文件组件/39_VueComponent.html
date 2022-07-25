@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+        关于VueComponent:
+            1.school组件本质是一个名为VueComponent的构造函数，且不是程序员定义的，是程序自动生生的
+            2.我们只需要写</school>或者<school></school>,Vue解析时候会帮我们创建school组件的实例对象，
+              即Vue帮我们执行的：new VueComponent(options).
+            3.特别注意：每次调用Vue.extend,返回的都是一个全新的VueComponent!!
+            4.关于this的指向：
+                （1）组件配置中：
+                    data函数、methods函数，watch中的函数，computed中的函数， 他们的this均是 【Vue】
+                （2）new Vue()配置中：
+                    data函数、methods函数，watch中的函数，computed中的函数， 他们的this均是 【Vue】
+            4.VueComponent的实例对象，vc
+              Vue实例对象，vm
+     -->
+    <div id="root">
+        <school></school>
+    </div>
+</body>
+<script>
+
+    const school =Vue.extend( {
+        name: 'school',
+        template: `
+        <div>
+            <h2>学校名称：{{name}}</h2>
+            <h2>学校地址：{{adress}}</h2>
+        </div>
+        `,
+        data() {
+            return {
+                name: 'hljwgy',
+                adress: 'hrb'
+            }
+        }
+    })
+
+    console.log(school)
+
+
+    new Vue({
+        el: '#root',
+        components: {
+            school
+        }
+    })
+</script>
+
+</html>

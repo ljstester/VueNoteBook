@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +8,61 @@
     <title>Document</title>
     <script src="../js/vue.js"></script>
 </head>
+
 <body>
-    
+    <div id="root">
+        <app></app>
+    </div>
+
 </body>
-    <script>
-        new Vue({
-            
-        })
-    </script>
+<script>
+    const adress = {
+        data() {
+            return {
+                adress: 'nj'
+            }
+        },
+        template: `
+        <h2>{{ adress }}</h2>
+        `
+
+    }
+    const user = {
+        data() {
+            return {
+                user_name: 'ljs'
+            }
+        },
+        components: {
+            adress
+        },
+        template: `
+                <div>
+                <adress></adress>
+                <h2>{{ user_name }}</h2>
+                </div>
+            `
+    }
+
+    const app = {
+        
+        components: {
+            user
+        },
+        template: `
+        <div>
+            <user></user>
+        </div>    
+        `
+    }
+
+    new Vue({
+        el: '#root',
+        components: {
+            app
+        }
+
+    })
+</script>
+
 </html>
